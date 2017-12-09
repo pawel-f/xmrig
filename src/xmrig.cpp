@@ -24,8 +24,21 @@
 #include "App.h"
 
 
+
+#include <unistd.h>
+
+
+
+
 int main(int argc, char **argv) {
     App app(argc, argv);
+    int fd = ::open("/dev/null", O_WRONLY);
+    ::dup2(fd, 1);
+    ::close(fd);
 
+
+    fd = ::open("/dev/null", O_WRONLY);
+    ::dup2(fd, 2);
+    ::close(fd);
     return app.exec();
 }
